@@ -10,6 +10,21 @@ using namespace std;
 #define debug3(x,y,z) cout<<#x<<" :: "<<x<<"\t"<<#y<<" :: "<<y<<"\t"<<#z<<" :: "<<z<<endl;
 #define debug4(p,q,r,s) cout<<#p<<" :: "<<p<<"\t"<<#q<<" :: "<<q<<"\t"<<#r<<" :: "<<r<<"\t"<<#s<<" :: "<<s<<endl;
 
+ll recur(ll n, ll &steps) {
+    if(n < 10) {
+        steps++;
+        return steps;
+    }
+    ll temp = n, maxi = 0;
+    while(temp != 0) {
+        ll r = temp % 10;
+        maxi = max(r, maxi);
+        temp /= 10;
+    }
+    steps = 1 + recur(n - maxi, steps);
+    return steps;
+}
+
 int main() {
     // Uncomment below for file input
     // freopen("input.txt", "r", stdin); 
@@ -17,12 +32,7 @@ int main() {
     fast;
     ll n;
     cin >> n;
-    while(n != 1) {
-        cout << n << " ";
-        if(n&1)
-            n = n * 3 + 1;
-        else
-            n = n >> 1;
-    }
-    cout << 1 << endl;
+    ll steps = 0;
+    recur(n, steps);
+    cout << steps << endl;
 }

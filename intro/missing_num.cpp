@@ -17,12 +17,13 @@ int main() {
     fast;
     ll n;
     cin >> n;
-    while(n != 1) {
-        cout << n << " ";
-        if(n&1)
-            n = n * 3 + 1;
-        else
-            n = n >> 1;
+    vector<ll> a(n, 0);
+    for(int i = 0; i < n-1; i++)
+        cin >> a[i];
+    ll res = n;
+    for(int i = 0; i < n; i++) {
+        res ^= i;
+        res ^= a[i];
     }
-    cout << 1 << endl;
+    cout << res << endl;
 }
