@@ -15,4 +15,27 @@ int main() {
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
+    ll t;
+    cin >> t;
+    while(t--) {
+        ll x, y;
+        cin >> x >> y;
+        ll maxi = max(x, y);
+        ll num = maxi * maxi;
+        ll mini_num = (maxi-1) * (maxi-1) + 1;
+        ll mid = (num + mini_num) >> 1;
+        if(maxi == x) {
+            if(maxi & 1)
+                num = mid - abs(x - y);
+            else
+                num = mid + abs(x - y);
+        } else {
+            if(maxi & 1)
+                num = mid + abs(x - y);
+            else
+                num = mid - abs(x - y);
+        }
+        cout << num << endl;
+    }
+    return 0;
 }
