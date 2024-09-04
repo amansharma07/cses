@@ -17,22 +17,12 @@ int main() {
     fast;
     ll n;
     cin >> n;
-    cout << 0 << endl;
-    for(int i = 2; i <= n; i++) {
-        ll sq = i * i;
-        ll tot = ( sq * (sq-1) ) >> 1; // nC2
-        ll attack = 2 * ((i - 1) * (i - 2) + (i - 2) * (i - 1)); // 2*3 grids + 3*2 grids times two because two possibilities for both
-        /* 
-        . #       # .
-        . .  and  . .
-        # .       . #
-
-        similarly for 2*3 as well
-
-        */
-
-        ll ways = tot - attack;
-        cout << ways << endl;
+    ll res = 0;
+    while(n) {
+        ll c = n/5;
+        res += n/5;
+        n /= 5;
     }
+    cout << res << endl;
     return 0;
 }

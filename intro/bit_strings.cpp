@@ -10,6 +10,19 @@ using namespace std;
 #define debug3(x,y,z) cout<<#x<<" :: "<<x<<"\t"<<#y<<" :: "<<y<<"\t"<<#z<<" :: "<<z<<endl;
 #define debug4(p,q,r,s) cout<<#p<<" :: "<<p<<"\t"<<#q<<" :: "<<q<<"\t"<<#r<<" :: "<<r<<"\t"<<#s<<" :: "<<s<<endl;
 
+const int MOD = 1e9 + 7;
+
+ll powerLLMod(ll x, ll n, ll mod) {
+    ll res = 1;
+    while(n) {
+        if(n & 1)
+            res = (res%mod * x%mod) % mod;
+        n /= 2;
+        x = (x%mod * x%mod) % mod; 
+    }
+    return res;
+}
+
 int main() {
     // Uncomment below for file input
     // freopen("input.txt", "r", stdin); 
@@ -17,22 +30,5 @@ int main() {
     fast;
     ll n;
     cin >> n;
-    cout << 0 << endl;
-    for(int i = 2; i <= n; i++) {
-        ll sq = i * i;
-        ll tot = ( sq * (sq-1) ) >> 1; // nC2
-        ll attack = 2 * ((i - 1) * (i - 2) + (i - 2) * (i - 1)); // 2*3 grids + 3*2 grids times two because two possibilities for both
-        /* 
-        . #       # .
-        . .  and  . .
-        # .       . #
-
-        similarly for 2*3 as well
-
-        */
-
-        ll ways = tot - attack;
-        cout << ways << endl;
-    }
-    return 0;
+    cout << powerLLMod(2LL, n, MOD) << endl;
 }

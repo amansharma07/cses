@@ -2,6 +2,7 @@
 #include<unordered_set>
 using namespace std;
 #define ll long long
+#define ld long double
 
 #define fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 
@@ -15,24 +16,16 @@ int main() {
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
-    ll n;
-    cin >> n;
-    cout << 0 << endl;
-    for(int i = 2; i <= n; i++) {
-        ll sq = i * i;
-        ll tot = ( sq * (sq-1) ) >> 1; // nC2
-        ll attack = 2 * ((i - 1) * (i - 2) + (i - 2) * (i - 1)); // 2*3 grids + 3*2 grids times two because two possibilities for both
-        /* 
-        . #       # .
-        . .  and  . .
-        # .       . #
-
-        similarly for 2*3 as well
-
-        */
-
-        ll ways = tot - attack;
-        cout << ways << endl;
+    ll t;
+    cin >> t;
+    while(t--) {
+        ll a, b;
+        cin >> a >> b;
+        if((2* a) >= b && (2 * a - b)%3 == 0 && (2* b) >= a && (2 * b - a)%3 == 0) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
     }
     return 0;
 }

@@ -15,24 +15,28 @@ int main() {
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
-    ll n;
-    cin >> n;
-    cout << 0 << endl;
-    for(int i = 2; i <= n; i++) {
-        ll sq = i * i;
-        ll tot = ( sq * (sq-1) ) >> 1; // nC2
-        ll attack = 2 * ((i - 1) * (i - 2) + (i - 2) * (i - 1)); // 2*3 grids + 3*2 grids times two because two possibilities for both
-        /* 
-        . #       # .
-        . .  and  . .
-        # .       . #
-
-        similarly for 2*3 as well
-
-        */
-
-        ll ways = tot - attack;
-        cout << ways << endl;
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> a(n);
+    for(int i = 0; i < n; i++)
+        cin >> a[i];
+    ll res = 0, dis_count = 0, left = 0, right = 0;
+    unordered_map<ll, ll> mp;
+    while(right < n) {
+        if(!mp.count(a[right]) || mp[a[right]] == 0) {
+            dis_count++;
+        }
+        mp[a[right]]++;
+        while (dis_count > k)
+        {
+            mp[a[left]]--;
+            if(mp[a[left]] == 0)
+                dis_count--;
+            left++;
+        }
+        res += (right - left + 1);
+        right++;
     }
+    cout << res << endl;
     return 0;
 }
