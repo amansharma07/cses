@@ -25,6 +25,11 @@ bool isSafe(int x, int y) {
 
 // https://usaco.guide/problems/cses-1625-grid-paths/solution --- IMP
 
+// What are these below ??
+
+//  if( !isVisited(x+1,y) and !isVisited(x-1,y) and isVisited(x,y+1) and isVisited(x,y-1) ) { visited[x][y] = false;return;}
+//  if( isVisited(x+1,y) and isVisited(x-1,y) and !isVisited(x,y+1) and !isVisited(x,y-1) ) { visited[x][y] = false;return;}
+
 #define up 0
 #define right 1
 #define down 2
