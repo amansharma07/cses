@@ -10,6 +10,7 @@ using namespace std;
 #define debug3(x,y,z) cout<<#x<<" :: "<<x<<"\t"<<#y<<" :: "<<y<<"\t"<<#z<<" :: "<<z<<endl;
 #define debug4(p,q,r,s) cout<<#p<<" :: "<<p<<"\t"<<#q<<" :: "<<q<<"\t"<<#r<<" :: "<<r<<"\t"<<#s<<" :: "<<s<<endl;
 
+/*
 int main() {
     // Uncomment below for file input
     // freopen("test_input.txt", "r", stdin); 
@@ -42,6 +43,37 @@ int main() {
             }
             cout << i + 1 << " " << j + 1 << endl;
             return 0;
+        }
+    }
+    cout << "IMPOSSIBLE" << endl;
+    return 0;
+}
+*/
+
+// Option 2 by sorting
+
+int main() {
+    // Uncomment below for file input
+    // freopen("test_input.txt", "r", stdin); 
+    // freopen("output.txt", "w", stdout); 
+    fast;
+    ll n, x;
+    cin >> n >> x;
+    vector<vector<ll>> a(n, vector<ll>(2));
+    for(int i = 0; i < n; i++) {
+        cin >> a[i][0];
+        a[i][1] = i + 1;
+    }
+    sort(begin(a), end(a));
+    ll left = 0, right = n - 1;
+    while(left < right) {
+        if(a[left][0] + a[right][0] == x) {
+            cout << a[left][1] << " " << a[right][1] << endl;
+            return 0;
+        } else if (a[left][0] + a[right][0] < x) {
+            left++;
+        } else {
+            right--;
         }
     }
     cout << "IMPOSSIBLE" << endl;
