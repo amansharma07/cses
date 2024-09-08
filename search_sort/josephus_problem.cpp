@@ -3,6 +3,12 @@
 using namespace std;
 #define ll long long
 
+
+#include <ext/pb_ds/assoc_container.hpp> 
+#include <ext/pb_ds/tree_policy.hpp> 
+using namespace __gnu_pbds; 
+#define ordered_set tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_node_update> 
+
 #define fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 
 #define debug(x) cout<<#x<<" :: "<<x<<endl;
@@ -25,6 +31,10 @@ int main() {
     fast;
     ll n;
     cin >> n;
+
+
+    // Option 1
+    /*
     queue<ll> q;
     for (int i = 1; i <= n; i++)
         q.push(i);
@@ -40,6 +50,21 @@ int main() {
             q.push(num);
         }
         flag = !flag;
+    }
+    cout << endl << endl;
+    */
+
+    // Option 2
+    ordered_set o_set;
+    ll i = 0, c = n;
+    for(int i = 1; i <= n; i++)
+        o_set.insert(i);
+    while(c) {
+        i = (i + 1) % c;
+        auto it = o_set.find_by_order(i);
+        cout << *it << " ";
+        o_set.erase(it);
+        c--;
     }
     return 0;
 }
