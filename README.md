@@ -9,3 +9,4 @@ Milestones:
 
 - [x] 02/09/2024: `Started solving`
 - [x] 06/09/2024 12:00 AM (Can say 5th :p): `Completed Intro section and few other problems from other sections`
+- [x] 12/09/2024 11:47 PM:  `Solved 50 problems in total`
