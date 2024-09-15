@@ -15,19 +15,25 @@ int main() {
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
-    ll n;
-    cin >> n;
+    ll n, k;
+    cin >> n >> k;
     vector<vector<ll>> a(n, vector<ll>(2));
+    multiset<ll> endTimes; // Movie end time of each person
     for(int i = 0; i < n; i++) {
         cin >> a[i][0] >> a[i][1];
     }
     sort(begin(a), end(a), [](const vector<ll> &x, const vector<ll> &y) { return x[1] < y[1];});
-    ll res = 0, time = 0;
+    for(ll i = 0; i < k; i++)
+        endTimes.insert(0);
+    ll res = 0;
     for(auto val : a) {
-        if(val[0] >= time) {
-            res++;
-            time = val[1];
-        }
+        auto it = endTimes.upper_bound(val[0]);
+		if (it == begin(endTimes)) continue;
+		// assign movie to be watched by member in multiset who finishes at time
+		endTimes.erase(--it);
+		// member now finishes watching at time v[i].first
+		endTimes.insert(val[1]);
+		res++;
     }
     cout << res << endl;
 }
