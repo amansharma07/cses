@@ -23,10 +23,20 @@ int main() {
         cin >> a[i][0] >> a[i][1];
     }
     sort(begin(a), end(a), [](const vector<ll> &x, const vector<ll> &y) { return x[1] < y[1];});
-    for(ll i = 0; i < k; i++)
-        endTimes.insert(0);
     ll res = 0;
-    for(auto val : a) {
+    for(int i = 0; i < k; i++) {
+        endTimes.insert(0);
+    }
+    /*
+    For each movie in order, 
+    we can assign a member to watch it if there exists an element in the sorted collection 
+    less than or equal to the start time of the movie. 
+    If there are multiple such elements, 
+    choose the greatest one (the member who finished watching his assigned movies the latest). 
+    Assign the member to watch this movie by incrementing the answer 
+    and updating the collection accordingly.
+    */
+    for(auto &val : a) {
         auto it = endTimes.upper_bound(val[0]);
 		if (it == begin(endTimes)) continue;
 		// assign movie to be watched by member in multiset who finishes at time
