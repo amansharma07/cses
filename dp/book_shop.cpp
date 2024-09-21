@@ -10,26 +10,29 @@ using namespace std;
 #define debug3(x,y,z) cout<<#x<<" :: "<<x<<"\t"<<#y<<" :: "<<y<<"\t"<<#z<<" :: "<<z<<endl;
 #define debug4(p,q,r,s) cout<<#p<<" :: "<<p<<"\t"<<#q<<" :: "<<q<<"\t"<<#r<<" :: "<<r<<"\t"<<#s<<" :: "<<s<<endl;
 
-const int MOD = 1e9 + 7;
-ll dp[(ll)1e6 + 5];
-    
+ll dp[100005];
+
 int main() {
     // Uncomment below for file input
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
+    // x is max weight
     ll n, x;
     cin >> n >> x;
-    vector<ll> v(n);
-    for(auto &i : v)
+    vector<ll> wei(n), val(n);
+    for(auto &i : wei)
         cin >> i;
-    dp[0] = 1;
-    for(ll i = 0; i <= x; i++) {
-        for(ll j = 0; j < n; j++) {
-            if(v[j] <= i) {
-                dp[i] = (dp[i] + dp[i-v[j]]) % MOD;
-            }
+    for(auto &i : val)
+        cin >> i;
+    for(int i = 0; i < n; i++) {
+        for(int j = x; j >= 0; j--) {
+            if(j < wei[i])
+                continue;
+
+            dp[j] = max(dp[j], val[i] + dp[j-wei[i]]);
         }
     }
     cout << dp[x] << endl;
+    return 0;
 }

@@ -11,25 +11,44 @@ using namespace std;
 #define debug4(p,q,r,s) cout<<#p<<" :: "<<p<<"\t"<<#q<<" :: "<<q<<"\t"<<#r<<" :: "<<r<<"\t"<<#s<<" :: "<<s<<endl;
 
 const int MOD = 1e9 + 7;
-ll dp[(ll)1e6 + 5];
-    
+
+ll dp[100005][105];
+
 int main() {
     // Uncomment below for file input
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
-    ll n, x;
-    cin >> n >> x;
+    ll n, m;
+    cin >> n >> m;
     vector<ll> v(n);
     for(auto &i : v)
         cin >> i;
-    dp[0] = 1;
-    for(ll i = 0; i <= x; i++) {
-        for(ll j = 0; j < n; j++) {
-            if(v[j] <= i) {
-                dp[i] = (dp[i] + dp[i-v[j]]) % MOD;
+    if(v[0] == 0) {
+        for(ll i = 1; i <= m; i++)
+            dp[0][i] = 1;
+    }
+    else
+        dp[0][v[0]] = 1;
+    for(ll i = 1; i < n; i++) {
+        if(v[i] == 0) {
+            for(ll j = 1; j <= m; j++) {
+                dp[i][j] = dp[i-1][j] + dp[i-1][j-1] + dp[i-1][j+1];
+                dp[i][j] %= MOD;
             }
+        } else {
+            ll j = v[i];
+            dp[i][j] = dp[i-1][j] + dp[i-1][j-1] + dp[i-1][j+1];
+            dp[i][j] %= MOD;
         }
     }
-    cout << dp[x] << endl;
+
+    ll ans = 0;
+
+    for (int val = 1; val <= m; val++) {
+        ans = (ans + dp[n - 1][val]) % MOD;
+    }
+
+    cout << ans;
+    return 0;
 }

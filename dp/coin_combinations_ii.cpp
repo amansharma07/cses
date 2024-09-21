@@ -24,8 +24,8 @@ int main() {
     for(auto &i : v)
         cin >> i;
     dp[0] = 1;
-    for(ll i = 0; i <= x; i++) {
-        for(ll j = 0; j < n; j++) {
+    for(ll j = 0; j < n; j++) {
+        for(ll i = 0; i <= x; i++) {
             if(v[j] <= i) {
                 dp[i] = (dp[i] + dp[i-v[j]]) % MOD;
             }
