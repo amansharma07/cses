@@ -39,14 +39,14 @@ int dir[5] = {-1, 0, 1, 0, -1};
 
 int main() {
     // Uncomment below for file input
-    freopen("test_input.txt", "r", stdin); 
-    freopen("output.txt", "w", stdout); 
+    // freopen("test_input.txt", "r", stdin); 
+    // freopen("output.txt", "w", stdout); 
     fast;
 
     ll n, m;
     cin >> n >> m;
     vector<vector<char>> grid(n, vector<char>(m));
-    map<pair<int, int>, int> par;
+    int par[n][m];
     pair<int, int> src;
     pair<int, int> des;
     cin.ignore();
@@ -67,7 +67,7 @@ int main() {
             
         }
     }
-    par[src] = -1;
+    par[src.first][src.second] = -1;
     queue<pair<int, int>> q;
     q.push(src);
     grid[src.first][src.second] = '#';
@@ -87,7 +87,7 @@ int main() {
                 pair<int, int> diff;
                 diff.first = dx - val.first;
                 diff.second = dy - val.second;
-                par[{dx, dy}] = directionInt[diff];
+                par[dx][dy] = directionInt[diff];
                 q.push({dx, dy});
             }
         }
@@ -96,16 +96,17 @@ int main() {
         cout << "YES" << endl;
         string res = "";
         auto u = des;
-        while(par[u] != -1) {
-            auto parent = par[u];
+        while(par[u.first][u.second] != -1) {
+            auto parent = par[u.first][u.second];
             auto tem = revDirectionInt[parent];
             pair<int, int> diff;
             diff.first = u.first - tem.first;
             diff.second = u.second - tem.second;
-            res = directionMap[parent] + res;
+            res += directionMap[parent];
             u = diff;
         }
         cout << res.size() << endl;
+        reverse(begin(res), end(res));
         cout << res << endl;
     } else {
         cout << "NO" << endl;
