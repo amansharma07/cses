@@ -35,7 +35,7 @@ int main() {
     auto comparator = [&](const Position &a, const Position &b){ return a.cost > b.cost; };
     priority_queue<Position, vector<Position>, decltype(comparator)> pq(comparator);
     pq.push({1, 0, false});
-    vector<bool> vis(n + 2, false);
+    // vector<bool> vis(n + 2, false);
     vector<vector<ll>> dis(n + 2, vector<ll>(2, INF));
     // Distance vector with coupon used flag combined, no and yes
     dis[1][0] = 0;
@@ -43,9 +43,9 @@ int main() {
     while(!pq.empty()) {
         auto val = pq.top();
         pq.pop();
-        if(vis[val.node])
+        if (dis[val.node][val.isCoupon] != val.cost)
             continue;
-        vis[val.node] = true;
+        // vis[val.node] = true;
         if(val.node == n)
             break;
         for(auto vv : adj[val.node]) {
