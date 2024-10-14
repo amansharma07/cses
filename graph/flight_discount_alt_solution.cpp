@@ -22,6 +22,7 @@ vector<long long> min_costs(int from, const vector<vector<pair<int, int>>> &neig
 		pair<long long, int> curr_state = frontier.top();
 		frontier.pop();
 		int curr = curr_state.second;
+		// Can this != be changed to >
 		if (-curr_state.first != min_costs[curr]) { continue; }
 
 		for (auto [n, nc] : neighbors[curr]) {

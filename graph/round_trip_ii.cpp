@@ -12,23 +12,21 @@ using namespace std;
 
 ll start, endi;
 
-bool dfs(vector<vector<ll>> &adj, ll src, vector<bool> &vis, unordered_map<ll, ll> &par, ll parent) {
-    auto u = src;
-    vis[u] = true;
-    for(auto v : adj[u]) {
-        if(v == parent)
-            continue;
-        if(!vis[v]) {
-            par[v] = u;
-            if(dfs(adj, v, vis, par, par[v]))
+bool dfs(ll src, vector<vector<ll>> &adj, vector<ll> &par, vector<char> &color) {
+    color[src] = 1;
+    for(auto v : adj[src]) {
+        if(color[v] == 0) {
+            par[v] = src;
+            if(dfs(v, adj, par, color))
                 return true;
-        } else {
+        } else if(color[v] == 1) {
             // Marking the correct start and end is important
             start = v;
-            endi = u;
+            endi = src;
             return true;
         }
     }
+    color[src] = 2;
     return false;
 }
 
@@ -37,23 +35,20 @@ int main() {
     // freopen("input.txt", "r", stdin); 
     // freopen("output.txt", "w", stdout); 
     fast;
-    start = endi = -1;
     ll n, m;
     cin >> n >> m;
-    vector<vector<ll>> adj(n + 2, vector<ll>());
+    vector<vector<ll>> adj(n + 2);
     while(m--) {
         ll u, v;
         cin >> u >> v;
         adj[u].push_back(v);
-        adj[v].push_back(u);
     }
-    vector<bool> vis(n + 2, false);
-    unordered_map<ll, ll> par;
-    ll flg = -1;
-    for(int i = 0; i < n && flg; i++) {
-        if(!vis[i] && dfs(adj, i, vis, par, par[i])) {
+    vector<char> color(n + 2, 0);
+    vector<ll> par(n + 2, -1);
+    start = -1;
+    for(ll i = 1; i <= n; i++) {
+        if(color[i] == 0 && dfs(i, adj, par, color))
             break;
-        }
     }
     if(start != -1) {
         vector<ll> res;
