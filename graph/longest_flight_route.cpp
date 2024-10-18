@@ -47,7 +47,12 @@ void solve()
             dfs(i, vis, g, s);
         }
     }
-    
+    // Contains a cycle
+    if (s.size() != n)
+    {
+        cout << "IMPOSSIBLE" << endl;
+        return;
+    }
     dis[1] = 0;
     while (!s.empty())
     {
