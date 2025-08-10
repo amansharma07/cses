@@ -15,10 +15,10 @@ bool isSafe(int x, int y, int m, int n, vector<vector<char>> &grid) {
 }
 
 map<int, char> directionMap = {
-    {2, 'L'},
-    {3, 'U'},
     {0, 'R'},
-    {1, 'D'}
+    {1, 'D'},
+    {2, 'L'},
+    {3, 'U'}
 };
 
 map<pair<int, int>, int> directionInt = {

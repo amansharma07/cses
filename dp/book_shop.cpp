@@ -26,9 +26,9 @@ int main() {
     for(auto &i : val)
         cin >> i;
     for(int i = 0; i < n; i++) {
-        for(int j = x; j >= 0; j--) {
-            if(j < wei[i])
-                continue;
+        for(int j = x; j >= wei[i]; j--) {
+            // if(j < wei[i])
+            //     continue;
 
             dp[j] = max(dp[j], val[i] + dp[j-wei[i]]);
         }
